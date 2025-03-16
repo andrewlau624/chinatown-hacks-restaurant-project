@@ -1,54 +1,70 @@
-// app/about/page.tsx
-import Image from 'next/image';
-import Link from 'next/link';
+"use client"
+
+import type React from "react"
+
+import Image from "next/image"
+import Link from "next/link"
+import { ChefHat, Utensils, Store, Users, ScrollText, MapPin } from "lucide-react"
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
-      {/* 头部大图 */}
-      <section className="relative h-95">
-        <div 
-          className="absolute inset-0 bg-cover opacity-20"
-          style={{ 
-            backgroundImage: "url('https://live.staticflickr.com/8491/8298064531_7837611209_b.jpg')" ,
-            backgroundPosition: 'center 70%', // 垂直方向从70%位置开始显示
+    <div className="min-h-screen bg-neutral-50">
+      {/* Hero Section */}
+      <section className="relative h-[600px] overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('https://live.staticflickr.com/8491/8298064531_7837611209_b.jpg')",
+            backgroundPosition: "center 70%",
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40" />
 
-        <div className="absolute inset-0 bg-black/60" />  
-
-        <div className="relative absolute inset-0 flex items-center justify-center">
-          <div className="text-center z-10 pt-32">
-            <h1 className="text-4xl md:text-6xl font-chinese text-white mb-6 my-5">
-              About this website
-            </h1>
-            <p className="text-xl text-white opacity-90">
-              something else
-            </p>
+        <div className="relative h-full flex flex-col items-center justify-center px-4 text-center z-10">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Celebrating Chinese Culinary Heritage
+          </h1>
+          <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+            Connecting communities through authentic flavors and cultural traditions
+          </p>
+          <div className="mt-10">
+            <Link
+              href="/restaurant-finder"
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full text-lg font-medium transition-colors duration-300"
+            >
+              Explore Our Cuisine
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 核心使命 */}
-      <section className="py-16 max-w-6xl mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-            <Image
-              src="/Seasoning.png"
-              alt="Seasoning"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="space-y-6">
-            <h2 className="text-3xl font-chinese text-red-800 mb-4">Our Mission</h2>
-            <div className="text-lg text-gray-700 leading-relaxed space-y-4">
-              <p>
-                Building a digital bridge between Chinatown supermarkets and home kitchens to demystify traditional Chinese ingredients.
-              </p>
-              <div className="pl-4 border-l-4 border-red-600">
-                <p className="text-gray-600 italic">
-                  “Re-understanding seasonings through the lens—making each spice a cultural ambassador”
+      {/* Mission Section */}
+      <section className="py-20 bg-neutral-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-xl">
+              <Image src="/Seasoning.png" alt="Traditional Chinese Seasonings" fill className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              <div className="absolute bottom-6 left-6 right-6 text-white">
+                <span className="px-3 py-1 bg-red-600 rounded-full text-sm font-medium">Our Heritage</span>
+              </div>
+            </div>
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Our Mission</h2>
+              <div className="text-lg text-gray-700 leading-relaxed space-y-4">
+                <p>
+                  We're building a digital bridge between Chinatown supermarkets and home kitchens to demystify
+                  traditional Chinese ingredients and cooking techniques.
+                </p>
+                <div className="pl-4 border-l-4 border-red-600">
+                  <p className="text-gray-600 italic">
+                    "Re-understanding seasonings through the lens—making each spice a cultural ambassador that tells the
+                    story of our community."
+                  </p>
+                </div>
+                <p>
+                  Through our platform, we aim to preserve culinary traditions while supporting local businesses that
+                  form the backbone of our community.
                 </p>
               </div>
             </div>
@@ -56,96 +72,145 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 两大核心功能 */}
-      <section className="py-16 bg-white">
+      {/* Core Features */}
+      <section className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-chinese text-center text-red-800 mb-12">Core Features</h2>
-          <div className="grid md:grid-cols-2 gap-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-6">Core Features</h2>
+          <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-16">
+            Innovative tools designed to connect you with authentic Chinese cuisine
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
             <FeatureCard
-              icon="📸"
+              icon={<Utensils className="w-8 h-8 text-red-600" />}
               title="Chinese Products Scanner"
-              content="Real-time analysis of Chinese specialty products, providing Benefits, Categories, etc. Even how to cook it!"
+              content="Real-time analysis of Chinese specialty products, providing benefits, categories, and cooking instructions to help you explore new ingredients with confidence."
             />
             <FeatureCard
-              icon="🥢"
+              icon={<MapPin className="w-8 h-8 text-red-600" />}
               title="Restaurant Finder"
-              content="From spicy to sweet, intelligently match the best restaurants and recipes for you"
+              content="From spicy Sichuan to delicate Cantonese, our intelligent system matches your taste preferences with the best authentic restaurants in San Francisco."
             />
           </div>
         </div>
       </section>
 
-      {/* 文化价值 */}
-      <section className="py-16 bg-yellow-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-chinese text-center text-red-800 mb-12">创造的价值</h2>
+      {/* Cultural Value */}
+      <section className="py-20 bg-red-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-16">Cultural Impact</h2>
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="p-6 bg-white rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4">文化传承</h3>
-              <ul className="list-disc pl-6 space-y-2 text-gray-600">
-                <li>数字化保存传统烹饪技法</li>
-                <li>每道菜背后的历史典故可视化呈现</li>
-                <li>连接三代厨艺传承人的故事地图</li>
+            <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow">
+              <div className="flex items-center mb-6">
+                <div className="bg-red-100 p-3 rounded-full">
+                  <ScrollText className="w-6 h-6 text-red-600" />
+                </div>
+                <h3 className="text-xl font-bold ml-4">Cultural Preservation</h3>
+              </div>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <span>Digitally preserving traditional cooking techniques</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <span>Visual storytelling of the history behind each dish</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <span>Connecting generations of culinary heritage</span>
+                </li>
               </ul>
             </div>
-            <div className="p-6 bg-white rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold mb-4">社区支持</h3>
-              <ul className="list-disc pl-6 space-y-2 text-gray-600">
-                <li>为家庭餐馆增加30%客流量</li>
-                <li>特色食材供应商数字名录</li>
-                <li>每月文化主题餐饮活动日历</li>
+            <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow">
+              <div className="flex items-center mb-6">
+                <div className="bg-red-100 p-3 rounded-full">
+                  <Store className="w-6 h-6 text-red-600" />
+                </div>
+                <h3 className="text-xl font-bold ml-4">Community Support</h3>
+              </div>
+              <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <span>Increasing customer flow to Chinese businesses in SF</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <span>Providing convenience to both businesses and shoppers</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-red-600 mr-2">•</span>
+                  <span>Weekly cultural-themed restaurant highlights</span>
+                </li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 独特优势 */}
-      <section className="py-16 bg-red-100">
+      {/* Our Difference */}
+      <section className="py-20 bg-neutral-50">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-chinese text-center text-red-800 mb-12">我们的不同</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-6">What Makes Us Different</h2>
+          <p className="text-xl text-gray-600 text-center max-w-3xl mx-auto mb-16">
+            We go beyond recipes to create meaningful connections with Chinese culinary culture
+          </p>
           <div className="grid gap-8 md:grid-cols-2">
-            <AdvantageItem 
-              title="深度文化连接"
-              content="不只是菜谱，更讲述每道菜背后的移民故事与文化迁徙轨迹"
+            <AdvantageItem
+              icon={<Users className="w-6 h-6 text-red-600" />}
+              title="Deep Cultural Connection"
+              content="We don't just share recipes – we tell the immigration stories and cultural journeys behind each dish, connecting you to generations of tradition."
             />
             <AdvantageItem
-              title="智能风味匹配"
-              content="基于机器学习分析您的味觉偏好，推荐最适合的餐馆与烹饪方案"
+              icon={<ChefHat className="w-6 h-6 text-red-600" />}
+              title="Intelligent Flavor Matching"
+              content="Using machine learning to analyze your taste preferences, we recommend the most suitable restaurants and cooking approaches tailored just for you."
             />
           </div>
-          <div className="mt-12 text-center">
+          <div className="mt-16 text-center">
             <Link
-              href="/discover"
-              className="bg-red-800 text-yellow-100 px-8 py-3 rounded-full 
-                       hover:bg-red-700 transition-colors font-chinese text-lg"
+              href="/restaurant-finder"
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full 
+                       transition-colors duration-300 text-lg font-medium inline-flex items-center"
             >
-              立即开启美食探索
+              Start Your Culinary Journey
+              <svg
+                className="w-5 h-5 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
             </Link>
           </div>
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-// 功能卡片组件
-function FeatureCard({ icon, title, content }: { icon: string, title: string, content: string }) {
+// Feature Card Component
+function FeatureCard({ icon, title, content }: { icon: React.ReactNode; title: string; content: string }) {
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
-      <p className="text-gray-600">{content}</p>
+    <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+      <div className="mb-6">{icon}</div>
+      <h3 className="text-xl font-bold mb-4 text-gray-900">{title}</h3>
+      <p className="text-gray-600 leading-relaxed">{content}</p>
     </div>
-  );
+  )
 }
 
-// 优势项组件
-function AdvantageItem({ title, content }: { title: string, content: string }) {
+// Advantage Item Component
+function AdvantageItem({ icon, title, content }: { icon: React.ReactNode; title: string; content: string }) {
   return (
-    <div className="bg-white p-6 rounded-lg border-l-4 border-red-600">
-      <h3 className="text-xl font-semibold text-red-800 mb-2">{title}</h3>
-      <p className="text-gray-600">{content}</p>
+    <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+      <div className="flex items-center mb-4">
+        {icon}
+        <h3 className="text-xl font-bold ml-3 text-gray-900">{title}</h3>
+      </div>
+      <p className="text-gray-600 leading-relaxed">{content}</p>
     </div>
-  );
+  )
 }
+
