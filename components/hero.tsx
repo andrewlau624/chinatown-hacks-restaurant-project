@@ -15,7 +15,7 @@ const Hero = () => {
   
     return (
       <div className="relative flex h-screen w-full flex-col items-center justify-center overflow-hidden bg-background bg-[url(https://as2.ftcdn.net/v2/jpg/04/59/10/19/1000_F_459101946_KkjgxmH1IG5pMTDiKOzImaMxzapEI83n.jpg)] bg-cover bg-center bg-no-repeat">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black z-0"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black z-0 backdrop-blur-sm"></div>
   
         <MorphingText texts={heroText} className="pointer-events-none z-10 whitespace-pre-wrap text-center sm:text-8xl text-6xl font-semibold leading-none text-white" />
   
