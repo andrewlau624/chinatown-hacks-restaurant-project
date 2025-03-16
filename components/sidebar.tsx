@@ -39,10 +39,12 @@ const Sidebar = () => {
                     <HomeIcon className="h-4 w-4" />
                     <span>Home</span>
                   </CommandItem>
-                  <CommandItem className="flex items-center gap-2 cursor-pointer">
-                    <BookAIcon className="h-4 w-4" />
-                    <span>About</span>
-                  </CommandItem>
+                  <Link href="/about">
+                    <CommandItem className="flex items-center gap-2 cursor-pointer">
+                      <BookAIcon className="h-4 w-4" />
+                      <span>About</span>
+                    </CommandItem>
+                  </Link>
                   <CommandItem className="flex items-center gap-2 cursor-pointer">
                     <ContactIcon className="h-4 w-4" />
                     <span>Developers</span>
