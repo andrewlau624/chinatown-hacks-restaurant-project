@@ -161,7 +161,7 @@ export async function getRestaurantFinderCompletion(data: any) {
             },
             "learn_more_link": {
               "type": "string",
-              "description": "A link to learn more about the restaurant."
+              "description": "A link to learn more about the restaurant. If the restaurant has it's own website, link it. Otherwise, link a google search to the website: https://www.google.com/search?q=[name]"
             },
             "tags": {
               "type": "array",
