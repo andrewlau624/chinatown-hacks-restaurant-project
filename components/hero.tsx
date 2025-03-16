@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { MorphingText } from "./magicui/morphing-text"
 import { NumberTicker } from "./magicui/number-ticker";
 import { Particles } from "./magicui/particles"
+import { Button } from "./ui/button";
 
 const Hero = () => {
     const heroText = [
@@ -25,7 +27,9 @@ const Hero = () => {
           />{" "}
           local businesses and sharing the rich flavors of Chinese cuisine with the world.
         </p>
-  
+        <Link href="/about" className="z-10">
+          <Button className="mt-5 border border-slate-300">Learn More</Button>
+        </Link>
         <Particles
           className="absolute inset-0 z-0"
           quantity={60}

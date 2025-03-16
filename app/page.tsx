@@ -51,6 +51,9 @@ const HomeContent = () => {
     
     const query = searchQuery.toLowerCase()
 
+    if(!query)
+      return
+
     const searchRes = await fetch("/api/twelvelabs/searchData", {
       method: "POST",
       headers: {
@@ -60,6 +63,9 @@ const HomeContent = () => {
     })
     
     const searchData = await searchRes.json()
+
+    if(!searchData)
+      return
 
     const videoRes = await fetch("/api/twelvelabs/videoSearch", {
       method: "POST",
@@ -71,14 +77,10 @@ const HomeContent = () => {
     
     const videoData = await videoRes.json()
 
-    console.log(searchData)
-
-    console.log(videoData)
-
       setVideoInfo({
-        title: "Z & Y's Famous Szechuan Dishes",
+        title: "Featured Video",
         description:
-          "Chef Han demonstrates the preparation of Z & Y's signature spicy Szechuan dishes, including their famous Chicken with Explosive Chili Pepper.",
+          "Explore this video to learn more about Z & Y Restaurant.",
         url: JSON.parse(videoData.content).videoUrl,
         startPos: searchData.content[0].start
       })
@@ -95,7 +97,7 @@ const HomeContent = () => {
       </VelocityScroll>
       <div className="container mx-auto px-4 py-16 relative z-10 mt-40">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-15 max-w-5xl mx-auto">
-          <Card className="overflow-hidden border-red-100 shadow-lg hover:shadow-xl transition-shadow duration-300 pt-0 bg-white/95">
+          <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300 pt-0 bg-white/95">
             <div className="relative h-64">
               <Image
                 src={restaurantImage || "/placeholder.svg"}
@@ -140,7 +142,7 @@ const HomeContent = () => {
             </CardFooter>
           </Card>
 
-          <Card className="overflow-hidden border-red-100 shadow-lg hover:shadow-xl transition-shadow duration-300 pt-0 bg-white/95">
+          <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300 pt-0 bg-white/95">
             <div className="relative h-64">
               <Image src={marketImage || "/placeholder.svg"} alt="Chinese Market" fill className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -309,7 +311,7 @@ const HomeContent = () => {
         </div>
       </div>
       <Dialog open={showVideoPopup} onOpenChange={setShowVideoPopup}>
-        <DialogContent className="max-w-3xl flex flex-col items-center">
+        <DialogContent className="w-full max-w-[90%] sm:max-w-2xl mx-auto px-4 sm:px-6 flex flex-col items-center">
           <DialogHeader className="text-center">
             <DialogTitle className="text-xl font-bold text-red-800">{videoInfo.title}</DialogTitle>
             <DialogDescription>{videoInfo.description}</DialogDescription>
@@ -327,6 +329,7 @@ const HomeContent = () => {
               />
             </div>
           </div>
+
           <DialogFooter className="mt-4">
             <Button onClick={() => setShowVideoPopup(false)} className="bg-red-700 hover:bg-red-600">
               Close Video
