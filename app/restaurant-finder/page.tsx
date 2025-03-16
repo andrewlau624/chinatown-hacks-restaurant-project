@@ -455,7 +455,7 @@ const RestaurantFinder = () => {
                   </div>
                 </div>
 
-                <Card className="border-red-200 shadow-md overflow-hidden">
+                <Card className="border-red-200 shadow-md overflow-hidden pt-0">
                   <div className="relative h-48 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10"></div>
                     <img

@@ -92,10 +92,10 @@ const HomeContent = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-80% z-0"></div>
 
       <Hero />
-      <VelocityScroll className="text-white/60 font-thin text-sm" defaultVelocity={1}>
+      <VelocityScroll className="text-white/60 font-thin" defaultVelocity={1}>
         Community. Local Business. Cultural.
       </VelocityScroll>
-      <div className="container mx-auto px-4 py-16 relative z-10 mt-40">
+      <div className="container mx-auto px-4 py-16 relative z-10 sm:mt-20 md:mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-15 max-w-5xl mx-auto">
           <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow duration-300 pt-0 bg-white/95">
             <div className="relative h-64">
@@ -237,14 +237,14 @@ const HomeContent = () => {
                     </div>
                     <div className="flex items-center text-gray-600">
                       <DollarSign className="h-4 w-4 mr-2" />
-                      <span>30 and under</span>
+                      <span>30-50</span>
                     </div>
                   </div>
                 </div>
 
                 <p className="text-gray-700 mb-6">
                   Z & Y Restaurant is a renowned Szechuan restaurant in San Francisco's Chinatown, famous for its
-                  authentic and fiery Szechuan cuisine. Chef Han Li Zhao, who previously cooked for government officials
+                  authentic and fiery Szechuan cuisine. Chef Lijun Han, who previously cooked for government officials
                   in China, brings traditional techniques and bold flavors to signature dishes like Chicken with
                   Explosive Chili Pepper and Tea-Smoked Duck.
                 </p>
