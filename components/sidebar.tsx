@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { BookAIcon, ContactIcon, HomeIcon, MenuIcon, ShoppingBag, UtensilsIcon, X } from 'lucide-react'
+import { BookAIcon, HomeIcon, MenuIcon, ShoppingBag, UtensilsIcon, X } from 'lucide-react'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
