@@ -4,20 +4,22 @@ const client = new TwelveLabs({
     apiKey: process.env.TWELVELABS_API_KEY!
 })
 
-export async function returnSearchData(data: any) {
+export async function returnSearchData(data: string) {
     const result = await client.search.query({
-        indexId: "67d5bc1b7544793220a52e06",
-        queryText: "hot pot",
+        indexId: process.env.TWELVELABS_INDEX_ID!,
+        queryText: data,
         options: ["visual", "audio"]
-      });
-
-      console.log(result.data)
-
-    const video = await client.index.video.retrieve(
-        "<YOUR_INDEX_ID>",
-        "<YOUR_VIDEO_ID>",
-        { embed: true }
-      );
+    });
 
     return result.data
+}
+
+export async function returnVideoData(data: any) {
+    const videoLinks = await client.index.video.retrieve(
+        process.env.TWELVELABS_INDEX_ID!,
+        data.content[0].videoId,
+        { embed: true }
+    );
+
+    return videoLinks.hls
 }

@@ -4,7 +4,8 @@ const groq = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-const productInsightPrompt = "Identify if the given product is a Chinese product. If it is, return the details in the following JSON schema. If the product is not Chinese, or cannot be physically consumed or used, return null for all fields. For the product link, perform a web search to find the most accurate and existing page. Verify that the link redirects correctly to the relevant product page and exists on the page's website. If there is not relevant link or the page does not exist on the website, return a google search for it. If you cannot confidently determine if the text identifies a Chinese product, significantly lower the confidence levels. Follow the JSON schema precisely."
+const productInsightPrompt = "Identify if the given product is a Chinese product. If it is, return the details in the following JSON schema. If the product is not Chinese, or cannot be physically consumed or used, return null for all fields. For the product link, perform a google search for the product name. Verify that the link redirects correctly to the google search  as such: https://www.google.com/search?q=[name]. If you cannot confidently determine if the text identifies a Chinese product, significantly lower the confidence levels. Follow the JSON schema precisely."
+const restaurantFinderPrompt = "Find a Chinese restaurant in San Francisco, California, using the given food data. Include a diverse selection of both well-known and lesser-known restaurants, not just popular ones. Try to unprioritize Michelin star restaurants and prioritize cost. Verify that the restaurant is currently open and located in San Francisco. All preference combinations are on a scale of 100. If the restaurant offers an unusual or irregular combination of flavors, assign a low confidence score."
 
 export async function getProductInsightCompletion(imageBase64: string) {
     return await groq.responses.create({
@@ -126,6 +127,122 @@ export async function getProductInsightCompletion(imageBase64: string) {
             }
         ],
         stream: false,
-        temperature: 0.25
+        temperature: 0.5
+    })
+}
+
+export async function getRestaurantFinderCompletion(data: any) {
+    return await groq.responses.create({
+        model: "gpt-4o",
+        text: {
+            "format": {
+              "type": "json_schema",
+"name": "restaurant_array",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "restaurants": {
+        "type": "array",
+        "description": "An array of restaurant objects ordered by confidence percentage.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the restaurant."
+            },
+            "description": {
+              "type": "string",
+              "description": "A brief description of the restaurant and why it matches the taste."
+            },
+            "address": {
+              "type": "string",
+              "description": "The exact address of the restaurant."
+            },
+            "learn_more_link": {
+              "type": "string",
+              "description": "A link to learn more about the restaurant."
+            },
+            "tags": {
+              "type": "array",
+              "description": "An array of tags associated with the restaurant.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "confidence_percentage": {
+              "type": "number",
+              "description": "The confidence percentage for the restaurant tastes compared to user preference."
+            },
+            "cuisine_type": {
+              "type": "string",
+              "description": "The type of cuisine offered by the restaurant."
+            },
+            "wait_time": {
+              "type": "string",
+              "description": "Estimated wait time for getting a table or service. One word only."
+            },
+            "price_range": {
+              "type": "string",
+              "description": "Price range of the restaurant represented by $, $$, or $$$.",
+              "enum": [
+                "$",
+                "$$",
+                "$$$"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "description",
+            "address",
+            "learn_more_link",
+            "tags",
+            "confidence_percentage",
+            "cuisine_type",
+            "wait_time",
+            "price_range"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "restaurants"
+    ],
+    "additionalProperties": false
+  },
+  "strict": true
+            }
+          },
+        input: [
+            {
+                role: "user",
+                content: [
+                    {
+                        type: "input_text",
+                        text: restaurantFinderPrompt
+                    },
+                    {
+                        type: "input_text",
+                        text: data
+                    }
+                ]
+            }
+        ],
+        tools: [
+            {
+                type: "web_search_preview",
+                search_context_size: "high",
+                user_location: {
+                    type: "approximate",
+                    city: "San Francisco, Chinatown",
+                    region: "California",
+                    country: "US"
+                }
+            }
+        ],
+        stream: false,
+        temperature: 1
     })
 }
