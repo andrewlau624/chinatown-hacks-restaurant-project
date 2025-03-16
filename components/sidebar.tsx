@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { BookAIcon, ContactIcon, HomeIcon, MenuIcon, ScanEyeIcon, UtensilsIcon, X } from 'lucide-react'
+import { BookAIcon, ContactIcon, HomeIcon, MenuIcon, ShoppingBag, UtensilsIcon, X } from 'lucide-react'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -35,19 +35,15 @@ const Sidebar = () => {
               <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
                 <CommandGroup heading="Menu">
+                    <Link href="/">
                   <CommandItem className="flex items-center gap-2 cursor-pointer">
                     <HomeIcon className="h-4 w-4" />
                     <span>Home</span>
                   </CommandItem>
-                  <Link href="/about">
-                    <CommandItem className="flex items-center gap-2 cursor-pointer">
-                      <BookAIcon className="h-4 w-4" />
-                      <span>About</span>
-                    </CommandItem>
                   </Link>
                   <CommandItem className="flex items-center gap-2 cursor-pointer">
-                    <ContactIcon className="h-4 w-4" />
-                    <span>Developers</span>
+                    <BookAIcon className="h-4 w-4" />
+                    <span>About</span>
                   </CommandItem>
                 </CommandGroup>
                 <CommandGroup heading="Apps">
@@ -59,7 +55,7 @@ const Sidebar = () => {
                     </Link>
                     <Link href="/product-insight">
                         <CommandItem className="flex items-center gap-2 cursor-pointer">
-                            <ScanEyeIcon className="h-4 w-4" />
+                            <ShoppingBag className="h-4 w-4" />
                             <span>Product Insight</span>
                         </CommandItem>
                     </Link>
