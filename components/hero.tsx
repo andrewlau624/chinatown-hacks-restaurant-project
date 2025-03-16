@@ -18,7 +18,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black z-0 backdrop-blur-sm"></div>
   
         <MorphingText texts={heroText} className="pointer-events-none z-10 whitespace-pre-wrap text-center sm:text-8xl text-6xl font-semibold leading-none text-white" />
-  
+   
         <p className="text-white text-xl sm:mt-4 mt-20 z-10 max-w-xl text-center mx-3">
           Empowering over{" "}
           <NumberTicker
